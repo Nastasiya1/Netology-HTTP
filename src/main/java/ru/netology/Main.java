@@ -42,11 +42,12 @@ public class Main {
         httpClient.close();
     }
 
-    public static <ServiceResponse> void readResponse(String body) throws JsonProcessingException {
+    public static void readResponse(String body) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        List<ServiceResponse> serviceResponse = mapper.readValue(body, new TypeReference<List<ServiceResponse>>() {});
+        List<ServiceResponse> serviceResponse = mapper.readValue(body, new TypeReference<List<ServiceResponse>>() {
+        });
         serviceResponse.stream()
-//                .filter(fact -> fact.get)
+                .filter(f -> f.getUpvotes() != null)
                 .forEach(System.out::println);
     }
 }
